@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Manage Users</title>
+<link href="/webjars/bootstrap/4.0.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h1>User manager table shows all users list</h1>
+		<p>
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#addUserModal" data-whatever="@mdo">Add New
+				User</button>
+		</p>
+		<!-- Modal for add user -->
+		<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">New message</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" method="post" action="###">
+							<fieldset>
+
+								<!-- Form Name -->
+								<legend>Add New User</legend>
+								
+								
+								<!-- First name input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="firstName">First
+										Name</label>
+									<div class="col-md-4">
+										<input id="firstName" name="firstName"
+											placeholder="Enter First Name" class="form-control input-md"
+											required="" type="text">
+
+									</div>
+								</div>
+								
+								<!-- Last name input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="lastName">Last
+										Name</label>
+									<div class="col-md-4">
+										<input id="lastName" name="lastName"
+											placeholder="Enter Last Name" class="form-control input-md"
+											required="" type="text">
+
+									</div>
+								</div>
+
+								<!-- Email input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="email">User
+										Email</label>
+									<div class="col-md-4">
+										<input id="email" name="email" placeholder="Enter Your Email"
+											class="form-control input-md" required="" type="email">
+
+									</div>
+								</div>
+
+								<!-- Password input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="password">Password</label>
+									<div class="col-md-4">
+										<input id="password" name="password"
+											placeholder="User password" class="form-control input-md"
+											required="" type="password">
+
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="contactNumber">User
+										Contact Number</label>
+									<div class="col-md-4">
+										<input id="contactNumber" name="contactNumber"
+											placeholder="User Contact Number"
+											class="form-control input-md" required="" type="text">
+
+									</div>
+								</div>
+
+								<!-- Search input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="searchinput">Search
+										Input</label>
+									<div class="col-md-4">
+										<input id="searchinput" name="searchinput"
+											placeholder="placeholder" class="form-control input-md"
+											type="search">
+										<p class="help-block">help</p>
+									</div>
+								</div>
+
+								<!-- Multiple Radios -->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="userStatus">User
+										Status</label>
+									<div class="col-md-4">
+										<div class="radio">
+											<label for="userStatus-0"> <input name="userStatus"
+												id="userStatus-0" value="active" checked="checked"
+												type="radio"> Active
+											</label>
+										</div>
+										<div class="radio">
+											<label for="userStatus-1"> <input name="userStatus"
+												id="userStatus-1" value="inactive" type="radio">
+												Inactive
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="billingAddress">Billing
+										Address</label>
+									<div class="col-md-4">
+										<input id="billingAddress" name="billingAddress"
+											placeholder="Billing Address" class="form-control input-md"
+											required="" type="text">
+
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="billingCity">Billing
+										City</label>
+									<div class="col-md-4">
+										<input id="billingCity" name="billingCity"
+											placeholder="Billing City" class="form-control input-md"
+											required="" type="text">
+
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="billingZipcode">Billing
+										Zip Code</label>
+									<div class="col-md-4">
+										<input id="billingZipcode" name="billingZipcode"
+											placeholder="Billing Zip Code" class="form-control input-md"
+											required="" type="text">
+
+									</div>
+								</div>
+
+								<!-- Select Basic -->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="selectbasic">Billing
+										Country</label>
+									<div class="col-md-4">
+										<select id="selectbasic" name="selectbasic"
+											class="form-control">
+											<option value="1">Bangladesh</option>
+											<option value="2">USA</option>
+											<option value="3">canada</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="shippingAddress">Shipping
+										Address</label>
+									<div class="col-md-4">
+										<input id="shippingAddress" name="shippingAddress"
+											placeholder="Shipping Address" class="form-control input-md"
+											required="" type="text">
+
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="shippingCity">Shipping
+										City</label>
+									<div class="col-md-4">
+										<input id="shippingCity" name="shippingCity"
+											placeholder="Shipping City" class="form-control input-md"
+											required="" type="text">
+
+									</div>
+								</div>
+
+								<!-- Text input-->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="shippingZipcode">Shipping
+										Zip Code</label>
+									<div class="col-md-4">
+										<input id="shippingZipcode" name="shippingZipcode"
+											placeholder="Shipping Zip Code" class="form-control input-md"
+											required="" type="text">
+
+									</div>
+								</div>
+
+								<!-- Select Basic -->
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="selectbasic">Shipping
+										Country</label>
+									<div class="col-md-4">
+										<select id="selectbasic" name="selectbasic"
+											class="form-control">
+											<option value="1">bangladesh</option>
+											<option value="2">usa</option>
+											<option value="3">canada</option>
+											<option value="4">australia</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Button (Double) -->
+								<hr>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="button1id"></label>
+									<div class="col-md-8">
+										<button type="submit" id="submit" name="submit"
+											class="btn btn-success">Submit</button>
+										<button id="cancel" name="cancel" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+
+							</fieldset>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		<table
+			class="table table-hover table-striped table-bordered table-dark">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">User Type</th>
+					<th scope="col">Action</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- <tr th:each="user : ${userList}">
+					<th scope="row"><span th:text="${user.getId()}" /></th>
+					<td><span th:text="${user.getName()}" /></td>
+					<td><span th:text="${user.getEmail()}" /></td>
+					<td><span th:text="${user.getUserType()}" /></td>
+
+					<td><a th:href="@{/updateUserForm/} + ${user.getId()}">
+
+							<button class="btn btn-sm">Update</button>
+					</a></td>
+
+					<td><a th:href="@{/deleteUser/} + ${user.getId()}">
+
+							<div th:switch="${user.getId()}">
+								<span th:case="${session.suser.getId()}"><button
+										class="btn btn-sm btn-danger" disabled>Delete</button></span> <span
+									th:case="*"><button class="btn btn-sm btn-danger">Delete</button></span>
+							</div>
+					</a></td>
+				</tr> -->
+
+			</tbody>
+		</table>
+
+
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="static/javaScript/userManager.js"></script>
+</body>
+</html>
