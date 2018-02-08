@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="UTF-8">
 <title>Manage Users</title>
-<link href="/webjars/bootstrap/4.0.0/dist/css/bootstrap.min.css" />
+<link th:href="@{/webjars/bootstrap/4.0.0/dist/css/bootstrap.min.css}" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -16,7 +17,7 @@
 	<div class="container">
 		<h1>User manager table shows all users list</h1>
 		<p>
-			<button type="button" class="btn btn-primary" data-toggle="modal"
+			<button id="addNew" type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#addUserModal" data-whatever="@mdo">Add New
 				User</button>
 		</p>
@@ -33,7 +34,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form class="form-horizontal" method="post" action="###">
+						<form class="form-horizontal" method="get" action="###">
 							<fieldset>
 
 								<!-- Form Name -->
@@ -270,7 +271,12 @@
 					<td><span th:text="${user.getName()}" /></td>
 					<td><span th:text="${user.getEmail()}" /></td>
 					<td><span th:text="${user.getUserType()}" /></td>
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 					<td><a th:href="@{/updateUserForm/} + ${user.getId()}">
 
 							<button class="btn btn-sm">Update</button>
@@ -291,7 +297,8 @@
 
 
 	</div>
+	<script type="text/javascript" th:src="@{/javaScript/userManager.js}"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript" src="static/javaScript/userManager.js"></script>
+	
 </body>
 </html>

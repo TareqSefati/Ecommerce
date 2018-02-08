@@ -10,4 +10,11 @@ public class UserController {
 	public String userManagerPage() {
 		return "userManager";
 	}
+	
+//	@GetMapping("/admin/userManager/getUsers")
+//	public String getAllUsers() {
+//		jsonob
+//		return "giving User List.";
+//	}
+	
 }

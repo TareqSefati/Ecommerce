@@ -235,6 +235,36 @@ public class User {
 		this.userUpdatedOn = userUpdatedOn;
 	}
 
+	
+	
+	public User(int userId, String userFirstName, String userLastName, String userEmail, String userPassword,
+			String userContactNumber, String userStatus, String userBillingAddress, String userBillingCity,
+			int userBillingCountry, String userBillingZipcode, String userShippingAddress, String userShippingCity,
+			int userShippingCountry, String userShippingZipcode, Date userCreatedOn, Date userUpdatedOn) {
+		this.userId = userId;
+		this.userFirstName = userFirstName;
+		this.userLastName = userLastName;
+		this.userEmail = userEmail;
+		this.userPassword = userPassword;
+		this.userContactNumber = userContactNumber;
+		this.userStatus = userStatus;
+		this.userBillingAddress = userBillingAddress;
+		this.userBillingCity = userBillingCity;
+		this.userBillingCountry = userBillingCountry;
+		this.userBillingZipcode = userBillingZipcode;
+		this.userShippingAddress = userShippingAddress;
+		this.userShippingCity = userShippingCity;
+		this.userShippingCountry = userShippingCountry;
+		this.userShippingZipcode = userShippingZipcode;
+		this.userCreatedOn = userCreatedOn;
+		this.userUpdatedOn = userUpdatedOn;
+	}
+	
+	
+
+	public User() {
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userFirstName=" + userFirstName + ", userLastName=" + userLastName
