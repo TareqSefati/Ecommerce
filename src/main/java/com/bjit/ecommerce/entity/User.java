@@ -42,7 +42,7 @@ public class User {
 	private String userPassword;
 	
 	@Column(name="user_contact_number")
-	@Size(min=8, max=20, message="Contact number should be between 8 and 20 characters long.")
+	@Size(min=5, max=20, message="Contact number should be between 8 and 20 characters long.")
 	private String userContactNumber;
 	
 	@Column(name="user_status")

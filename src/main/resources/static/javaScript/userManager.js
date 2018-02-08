@@ -1,12 +1,12 @@
 $(document).ready(function () {
 
-    $("#cancel").on("click", function() {
+    $("#submit").on("click", function(event) {
 
         //stop submit the form, we will post it manually.
-        //event.preventDefault();
+        event.preventDefault();
 
     	$.ajax({
-            type: "GET",
+            type: "POST",
             contentType: "application/json",
             url: "/admin/userManager/getUsers",
             
