@@ -58,20 +58,27 @@ public class RestUserController {
 //		}
 //	}
 	
-	@PostMapping(value="/admin/userManager/getUsers", produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
-			headers="\"Content-Type\": \"application/json; charset=UTF-8\"")
-	@ResponseBody
-	public ResponseEntity<?> getAllRestUsers(@RequestBody  User user, BindingResult result, Errors errors) {
+	@PostMapping(value="/admin/userManager/getUsers")
+	
+	public void getAllRestUsers(@Valid @RequestBody  User user, BindingResult result, Errors errors) {
 		System.out.println("hi there.:  " + user);
-		if(result.hasErrors()) {
-			System.out.println("has error");
-			return ResponseEntity.ok(errors);
-		}else {
-			System.out.println("Found Data.");
-			return ResponseEntity.ok(user);
-			//return ResponseEntity.ok(user);
-		}
+//		if(result.hasErrors()) {
+//			System.out.println("has error");
+//			user = null;
+//			return ResponseEntity.ok(user);
+//		}else {
+//			System.out.println("Found Data.");
+//			return ResponseEntity.ok(user);
+//			//return ResponseEntity.ok(user);
+//		}
 		//return null;
+		
+		if(result.hasErrors()) {
+			//System.out.println(errors.getAllErrors());
+			System.out.println("ERRORS.");
+		}else {
+			System.out.println("Data is validated.");
+		}
 	}
 	
 }

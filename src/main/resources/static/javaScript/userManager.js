@@ -15,12 +15,14 @@ $(document).ready(function () {
 
         var formData = {};
         formData["userId"] = null;
-        formData["userFirstName"] = $("#firstName").val();
+        formData["userFirstName"] = $("#userFirstName").val();
         formData["userLastName"] = $("#lastName").val();
         formData["userEmail"] = $("#email").val();
         formData["userPassword"] = $("#password").val();
         formData["userContactNumber"] = $("#contactNumber").val();
-        formData["userStatus"] = $("#userStatus").val();
+        //formData["userStatus"] = $("#userStatus").val(); //not working code
+        formData["userStatus"] = $('input[name=userStatus]:checked').val(); //works fine
+        //formData["userStatus"] = $('form input[type=radio]:checked').val(); //works fine
         
         formData["userBillingAddress"] = $("#billingAddress").val();
         formData["userBillingCity"] = $("#billingCity").val();
@@ -36,7 +38,7 @@ $(document).ready(function () {
         formData["userUpdatedOn"] = null;
         
         console.log(formData);
-        
+        console.log(JSON.stringify(formData));
 
        // die();
     	$.ajax({
@@ -44,15 +46,15 @@ $(document).ready(function () {
             contentType: "application/json",
             url: "/admin/userManager/getUsers",
             //data: JSON.stringify(testData),
-            data: formData,
+            data: JSON.stringify(formData),
             processData: false,
-            contentType: false,
+           // contentType: false,
            
             dataType: 'json',
             cache: false,
             timeout: 600000,
             success: function (data) {
-                console.log("SUCCESS : ", data);
+                console.log("SUCCESS : ", data.userFirstName);
 
             },
             error: function (e) {
@@ -60,6 +62,17 @@ $(document).ready(function () {
             }
         });
 
+    });
+    
+    $('.table .eBtn').on('click', function(event){
+    	event.preventDefault();
+    	var href = $(this).attr('href');
+    	
+    	jQuery.get(href, function(user, status){
+    		$('.myForm #userFirstName').val(user.userFirstName);
+    	});
+    	
+    	$('.myForm #addUserModal').modal();
     });
 
 });

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Manage Users</title>
+<link th:href="@{/webjars/bootstrap/4.0.0/dist/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h1>User Registration Page</h1>
+
+		<!-- Registration form to add user -->
+		<form class="form-horizontal" id="addUser" method="post" action="/addUser" th:object="${user}">
+			<fieldset>
+
+				<!-- Form Name -->
+				<legend>Register New User</legend>
+
+				<!-- <input type="hidden" name="userId" value="12">
+				<input type="hidden" name="userCreatedOn" value="date('Y-m-d')">
+				<input type="hidden" name="userUpdatedOn" value="date('Y-m-d')"> -->
+
+				<!-- First name input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userFirstName">First
+						Name</label>
+					<div class="col-md-4">
+						<input id="userFirstName" name="userFirstName"
+							th:field="*{userFirstName}" placeholder="Enter First Name"
+							class="form-control input-md" required maxlength="30" min="3"
+							type="text">
+							 <span class="text-danger"
+							th:if="${#fields.hasErrors('userFirstName')}"
+							th:errors="*{userFirstName}"></span>
+					</div>
+				</div>
+
+				<!-- Last name input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userLastName">Last
+						Name</label>
+					<div class="col-md-4">
+						<input id="userLastName" name="userLastName"
+							placeholder="Enter Last Name" class="form-control input-md"
+							required type="text" th:field="*{userLastName}" maxlength="30" min="3">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userLastName')}"
+							th:errors="*{userLastName}"></span>
+					</div>
+				</div>
+
+				<!-- Email input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userEmail">User
+						Email</label>
+					<div class="col-md-4">
+						<input id="userEmail" name="userEmail" placeholder="Enter Your Email"
+							class="form-control input-md" required th:field="*{userEmail}" type="email"
+							maxlength="255">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userEmail')}"
+							th:errors="*{userEmail}"></span>
+					</div>
+				</div>
+
+				<!-- Password input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userPassword">Password</label>
+					<div class="col-md-4">
+						<input id="userPassword" name="userPassword" placeholder="User password"
+							class="form-control input-md" required th:field="*{userPassword}" type="password">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userPassword')}"
+							th:errors="*{userPassword}">
+						</span>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userContactNumber">User
+						Contact Number</label>
+					<div class="col-md-4">
+						<input id="userContactNumber" name="userContactNumber"
+							placeholder="User Contact Number" class="form-control input-md"
+							required type="text" th:field="*{userContactNumber}"
+							min="5" maxlength="20">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userContactNumber')}"
+							th:errors="*{userContactNumber}">
+						</span>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userBillingAddress">Billing
+						Address</label>
+					<div class="col-md-4">
+						<input id="userBillingAddress" name="userBillingAddress"
+							placeholder="Billing Address" class="form-control input-md"
+							required type="text" th:field="*{userBillingAddress}">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userBillingAddress')}"
+							th:errors="*{userBillingAddress}">
+						</span>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userBillingCity">Billing
+						City</label>
+					<div class="col-md-4">
+						<input id="userBillingCity" name="userBillingCity"
+							placeholder="Billing City" class="form-control input-md"
+							required type="text" th:field="*{userBillingCity}">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userBillingCity')}"
+							th:errors="*{userBillingCity}">
+						</span>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userBillingZipcode">Billing
+						Zip Code</label>
+					<div class="col-md-4">
+						<input id="userBillingZipcode" name="userBillingZipcode"
+							placeholder="Billing Zip Code" class="form-control input-md"
+							required th:field="*{userBillingZipcode}" type="text">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userBillingZipcode')}"
+							th:errors="*{userBillingZipcode}">
+						</span>
+					</div>
+				</div>
+
+				<!-- Select Basic -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userBillingCountry">Billing
+						Country</label>
+					<div class="col-md-4">
+						<select id="userBillingCountry" name="userBillingCountry"
+							class="form-control" th:field="*{userBillingCountry}">
+							<option value="1">Bangladesh</option>
+							<option value="2">USA</option>
+							<option value="3">canada</option>
+						</select>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userShippingAddress">Shipping
+						Address</label>
+					<div class="col-md-4">
+						<input id="userShippingAddress" name="userShippingAddress"
+							placeholder="Shipping Address" class="form-control input-md"
+							required th:field="*{userShippingAddress}" type="text">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userShippingAddress')}"
+							th:errors="*{userShippingAddress}">
+						</span>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userShippingCity">Shipping
+						City</label>
+					<div class="col-md-4">
+						<input id="userShippingCity" name="userShippingCity"
+							placeholder="Shipping City" class="form-control input-md"
+							required th:field="*{userShippingCity}" type="text">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userShippingCity')}"
+							th:errors="*{userShippingCity}">
+						</span>			
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userShippingZipcode">Shipping
+						Zip Code</label>
+					<div class="col-md-4">
+						<input id="userShippingZipcode" name="userShippingZipcode"
+							placeholder="Shipping Zip Code" class="form-control input-md"
+							required th:field="*{userShippingZipcode}" type="text">
+						<span class="text-danger"
+							th:if="${#fields.hasErrors('userShippingZipcode')}"
+							th:errors="*{userShippingZipcode}">
+						</span>	
+					</div>
+				</div>
+
+				<!-- Select Basic -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="userShippingCountry">Shipping
+						Country</label>
+					<div class="col-md-4">
+						<select id="userShippingCountry" name="userShippingCountry"
+							class="form-control" th:field="*{userShippingCountry}" >
+							<option value="1">bangladesh</option>
+							<option value="2">usa</option>
+							<option value="3">canada</option>
+							<option value="4">australia</option>
+						</select>
+					</div>
+				</div>
+
+				<!-- Button (Double) -->
+				<hr>
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="button1id"></label>
+					<div class="col-md-8">
+						<button type="submit" id="submit" name="submit"
+							class="btn btn-success">Submit</button>
+						<button id="cancel" name="cancel" class="btn btn-danger"
+							data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+</body>
+</html>

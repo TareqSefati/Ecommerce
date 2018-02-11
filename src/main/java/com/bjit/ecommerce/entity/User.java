@@ -34,7 +34,7 @@ public class User {
 	
 	@Column(name="user_email")
 	@Email(message="Please provide a valid Email.")
-	@Size(min=5, max=255, message="Email should be between 5 and 255 characters long.")
+	@Size(max=255, message="Email should be under 255 characters long.")
 	private String userEmail;
 	
 	@Column(name="user_password")
@@ -42,11 +42,10 @@ public class User {
 	private String userPassword;
 	
 	@Column(name="user_contact_number")
-	@Size(min=5, max=20, message="Contact number should be between 8 and 20 characters long.")
+	@Size(min=5, max=20, message="Contact number should be between 5 and 20 characters long.")
 	private String userContactNumber;
 	
 	@Column(name="user_status")
-	@NotNull
 	private String userStatus;
 	
 	@Column(name="user_billing_address")

@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link th:href="@{/webjars/bootstrap/4.0.0/dist/css/bootstrap.min.css}" />
-
+<link th:href="@{/webjars/bootstrap/4.0.0/dist/css/bootstrap.min.css}" href="/webjars/bootstrap/4.0.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 </head>
 <body class="container">
 	<h1>Hello web E-commerce</h1>
+	<a> <button class="btn btn-sm btn-primary">Log In</button> </a>
+	<a th:href="@{/userRegistration}"> <button class="btn btn-sm btn-primary">Registration</button> </a>
 </body>
 </html>

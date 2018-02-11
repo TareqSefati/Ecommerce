@@ -1,4 +1,4 @@
-package com.bjit.econnerce;
+package com.bjit.ecommerce;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
