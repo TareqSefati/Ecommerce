@@ -91,5 +91,16 @@ $(document).ready(function () {
 //    	
     	$('.myForm #addUserModal').modal();
     });
+    
+    //ajax login
+    //working on it
+    $('#loginForm #submit').on('click', function(event){
+    	event.preventDefault();
+    	$.ajax({
+    		type: "POST",
+    		contentType: "application/json",
+            url: "/admin/userManager/getUsers",
+    	});
+    });
 
 });

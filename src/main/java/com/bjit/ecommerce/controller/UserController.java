@@ -2,9 +2,11 @@ package com.bjit.ecommerce.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,10 +68,18 @@ public class UserController {
 //		
 //	}
 	
-	@GetMapping("/getUserBy/")
+	@GetMapping("/getUserById/")
 	@ResponseBody
 	public User updatingUser(int userId, Model model, User user) {
 		return userService.getUserById(userId);
+	}
+	
+	@PostMapping("/login")
+	public User userLogin(HttpServletRequest request) {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		System.out.println(username + "  "+ password);
+		return null;
 	}
 	
 //	@GetMapping("/admin/userManager/getUsers")

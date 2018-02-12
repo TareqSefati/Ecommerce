@@ -149,63 +149,48 @@
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+		        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div>
 		      <div class="modal-body">
-		        <form method="post" action="">
-		          <div class="form-group row">
-		            <label for="username" class="col-form-label col-sm-4">Username</label>
-		            <input maxlength="30" min="3" type="text" class="form-control col-sm-8" id="username">
-		          </div>
-		          <div class="form-group row">
-		            <label for="password" class="col-form-label col-sm-4">Password</label>
-		            <input type="password" class="form-control col-sm-8" id="password">
-		          </div>
-		          
-		          <div class="form-group row">
-					<label class="col-sm-3 control-label" for="username">First
-						Name</label>
-					<div class="col-sm-9">
-						<input id="username" required maxlength="30" min="3" placeholder="Enter First Name"
-						 class="form-control" type="text" /> 
+		        <form method="post" th:action="@{/login}" id="loginForm"> 
+				<!-- Username input-->
+				<div class="form-group row">
+					
+					<div class="col-md-12 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-user"></i></span> <input name="username" id="username"
+								placeholder="Enter Email" class="form-control" type="text" maxlength="30" min="3"/>
+						</div>
 					</div>
-				  </div>
+				</div>
+
+				<!-- Password input-->
+				<div class="form-group row">
+					
+					<div class="col-md-12 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i
+								class="glyphicon glyphicon-lock"></i></span> <input name="password" id="password"
+								placeholder="Enter Password" class="form-control" type="password" />
+						</div>
+					</div>
+				</div>
 				  
-				  <!-- Text input-->
-
-				<div class="form-group">
-					<label class="col-md-4 control-label">First Name</label>
-					<div class="col-md-4 inputGroupContainer">
-						<div class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-user"></i></span> <input name="first_name"
-								placeholder="First Name" class="form-control" type="text">
-						</div>
-					</div>
-				</div>
-
-				<!-- Text input-->
-
-				<div class="form-group">
-					<label class="col-md-4 control-label">Last Name</label>
-					<div class="col-md-4 inputGroupContainer">
-						<div class="input-group">
-							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-user"></i></span> <input name="last_name"
-								placeholder="Last Name" class="form-control" type="text">
-						</div>
-					</div>
-				</div>
+				  <hr />
+				  <div>
+		        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+		        <input type="submit" class="btn btn-success" id="submit" value="Login" />
+		        <a th:href="@{/userRegistration}" ><button type="button" class="btn btn-primary">Register New User </button></a>
+		      </div>
 				  
 		        </form>
 		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Send message</button>
-		      </div>
+		      
+		      
 		    </div>
 		  </div>
 		</div>
