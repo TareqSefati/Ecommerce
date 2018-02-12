@@ -70,8 +70,25 @@ $(document).ready(function () {
     	
     	jQuery.get(href, function(user, status){
     		$('.myForm #userFirstName').val(user.userFirstName);
+    		$('.myForm #userLastName').val(user.userLastName);
+    		$('.myForm #userEmail').val(user.userEmail);
+    		$('.myForm #userContactNumber').val(user.userContactNumber);
+    		if(user.userStatus == 'active'){
+    			$('.myForm select').val('active');
+    		}else{
+    			$('.myForm select').val('inactive');
+    		}
+    		$('.myForm #userBillingAddress').val(user.userBillingAddress);
+    		$('.myForm #userBillingCity').val(user.userBillingCity);
+    		$('.myForm #userBillingZipcode').val(user.userBillingZipcode);
+    		$('.myForm #userBillingCountry').val(userBillingCountry);
+
+    		$('.myForm #userShippingAddress').val(userShippingAddress);
+    		$('.myForm #userShippingCity').val(userShippingCity);
+    		$('.myForm #userShippingZipcode').val(userShippingZipcode);
+    		$('.myForm #userShippingCountry').val(userShippingCountry);
     	});
-    	
+//    	
     	$('.myForm #addUserModal').modal();
     });
 

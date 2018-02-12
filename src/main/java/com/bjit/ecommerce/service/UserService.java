@@ -25,7 +25,7 @@ public class UserService {
 	}
 	
 	public Page<User> getPaginatetUser(int page) {
-		return userRepository.findAll(new PageRequest(page, 3));
+		return userRepository.findAll(new PageRequest(page, 2));
 	}
 	
 	public User getUserById(int userId) {
