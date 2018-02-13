@@ -102,5 +102,25 @@ $(document).ready(function () {
             url: "/admin/userManager/getUsers",
     	});
     });
+    
+    //ajax pagination
+    $('#pNav .pNavLink').on('click', function(event){
+    	event.preventDefault();
+    	var clickedPage = $(this).data("page");
+    	$.ajax({
+    		type: "GET",
+    		contentType: "application/json",
+    		url: "/admin/userManagerAjax",
+    		data: {
+    			page: clickedPage
+    		},
+    		success: function(result){
+    			console.log(result)
+    		},
+    		error: function(e){
+    			console.log("ERROR: ",e);
+    		}
+    	});
+    });
 
 });

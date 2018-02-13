@@ -3,9 +3,11 @@ package com.bjit.ecommerce.controller;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bjit.ecommerce.entity.User;
+import com.bjit.ecommerce.response.UserPageResponse;
 import com.bjit.ecommerce.service.UserService;
 
 @Controller
@@ -25,14 +28,35 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping("/admin/userManager")
-	public String userManagerPage(User user, Model model, @RequestParam(defaultValue="0") int page) {
+	public String userManagerPage(HttpSession session, Model model, @RequestParam(defaultValue="0") int page) {
 //		List<User> userList = userService.getAllUsers();
 //		model.addAttribute("userList", userList);
 		System.out.println("Page number is: " + page);
+		if(session.getAttribute("user") == null) {
+			session.setAttribute("user", new User());
+		}
 		model.addAttribute("userList", userService.getPaginatetUser(page));
 		model.addAttribute("currentPage", page);
-		model.addAttribute("user", user);
+		
 		return "userManager";
+	}
+	
+	@GetMapping("/admin/userManagerAjax")
+	@ResponseBody
+	public UserPageResponse userManagerPageAjax(HttpSession session, Model model, @RequestParam("page") int page) {
+		if(session.getAttribute("user") == null) {
+			session.setAttribute("user", new User());
+		}
+		
+//		System.out.println("Page number is: " + page);
+//		model.addAttribute("userList", userService.getPaginatetUser(page));
+//		model.addAttribute("currentPage", page);
+		
+		UserPageResponse response = new UserPageResponse();
+		response.setcurrentPage(page);
+		response.setPageUser(userService.getPaginatetUser(page));
+		
+		return response;
 	}
 	
 	@GetMapping("/userRegistration")
