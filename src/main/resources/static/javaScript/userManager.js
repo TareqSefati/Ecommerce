@@ -64,6 +64,7 @@ $(document).ready(function () {
 
     });
     
+    //***Pop up editing form with populated data
     $('.table .eBtn').on('click', function(event){
     	event.preventDefault();
     	var href = $(this).attr('href');
@@ -81,12 +82,12 @@ $(document).ready(function () {
     		$('.myForm #userBillingAddress').val(user.userBillingAddress);
     		$('.myForm #userBillingCity').val(user.userBillingCity);
     		$('.myForm #userBillingZipcode').val(user.userBillingZipcode);
-    		$('.myForm #userBillingCountry').val(userBillingCountry);
+    		$('.myForm #userBillingCountry').val(user.userBillingCountry);
 
-    		$('.myForm #userShippingAddress').val(userShippingAddress);
-    		$('.myForm #userShippingCity').val(userShippingCity);
-    		$('.myForm #userShippingZipcode').val(userShippingZipcode);
-    		$('.myForm #userShippingCountry').val(userShippingCountry);
+    		$('.myForm #userShippingAddress').val(user.userShippingAddress);
+    		$('.myForm #userShippingCity').val(user.userShippingCity);
+    		$('.myForm #userShippingZipcode').val(user.userShippingZipcode);
+    		$('.myForm #userShippingCountry').val(user.userShippingCountry);
     	});
 //    	
     	$('.myForm #addUserModal').modal();
@@ -103,7 +104,7 @@ $(document).ready(function () {
     	});
     });
     
-    //ajax pagination
+    //***ajax pagination
     $('#pNav .pNavLink').on('click', function(event){
     	event.preventDefault();
     	var clickedPage = $(this).data("page");
@@ -146,7 +147,7 @@ $(document).ready(function () {
     						
     						"<td>" +
     							"<a class='btn btn-sm btn-info eBtn'" +
-    							"th:href='@{/getUserById/(userId="+obj.userId+")} '>Update </a>" +
+    							"th:href='@{/getUserById/(userId="+obj.userId+")}'>Update </a>" +
     							"<p><a th:href='@{/deletingUser/"+obj.userId+"}'" +
     							"class='btn btn-sm btn-danger'> Delete </a></p>"+
     						
@@ -156,8 +157,8 @@ $(document).ready(function () {
     				
     			}
     			//console.log(result.currentPage);
-    			var p = result.pageUser.totalPages;
-    			console.log(isNaN(p));
+//    			var p = result.pageUser.totalPages;
+//    			console.log(isNaN(p));
 //    			var navStr = "<ul class='pagination justify-content-center'>" +
 //    					"<li class='page-item'" +
 //    					"th:each='i : ${#numbers.sequence(0,2)}'" +
@@ -166,17 +167,25 @@ $(document).ready(function () {
 //    					"th:text='${i}'> </a></li>" +
 //    					"</ul>";
     			
-    			var pillStr = "<ul class=\"pagination justify-content-center\"> " +
-		    					"<li class=\"page-item\" th:each=\"i : ${#numbers.sequence(0,"+p+")}\" th:classappend=\"${currentPage}==${i}?'active':''\">" +
-		    						"<a class=\"page-link pNavLink\" th:href=\"@{/admin/userManager/(page=${i})}\" th:data-page=\"${i}\" th:text=\"${i}\"> </a>" +
-		    					"</li>" +
-		    				  "</ul>";
-    			
-    			
+//    			var pillStr = "<ul class=\"pagination justify-content-center\"> " +
+//		    					"<li class=\"page-item\" th:each=\"i : ${#numbers.sequence(0,"+p+")}\" th:classappend=\"${currentPage}==${i}?'active':''\">" +
+//		    						"<a class=\"page-link pNavLink\" th:href=\"@{/admin/userManager/(page=${i})}\" th:data-page=\"${i}\" th:text=\"${i}\"> </a>" +
+//		    					"</li>" +
+//		    				  "</ul>";
+//    			
+    			//$(this).addClass('active');
     			$('#tBody').html(str);
     			
     			//$('#pNav').empty();
-    			$('#pNav').html(pillStr);
+    			//***Highlight active pagination
+    			for(let i=0; i<result.pageUser.totalPages; i++){
+    				if(i == clickedPage){
+    					$("#pNav #nav-"+i+"").addClass("active");
+    				}else{
+    					$("#pNav #nav-"+i+"").removeClass("active");
+    				}
+    			}
+    			
     		},
     		error: function(e){
     			console.log("ERROR: ",e);

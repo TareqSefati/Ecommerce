@@ -27,20 +27,20 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	//***Getting User Manager Page
 	@GetMapping("/admin/userManager")
-	public String userManagerPage(HttpSession session, Model model, @RequestParam(defaultValue="0") int page) {
+	public String userManagerPage(User user, Model model, @RequestParam(defaultValue="0") int page) {
 //		List<User> userList = userService.getAllUsers();
 //		model.addAttribute("userList", userList);
 		System.out.println("Page number is: " + page);
-		if(session.getAttribute("user") == null) {
-			session.setAttribute("user", new User());
-		}
+		model.addAttribute("user", user);
 		model.addAttribute("userList", userService.getPaginatetUser(page));
 		model.addAttribute("currentPage", page);
 		
 		return "userManager";
 	}
 	
+	//***Manage User by ajax response
 	@GetMapping("/admin/userManagerAjax")
 	@ResponseBody
 	public UserPageResponse userManagerPageAjax(HttpSession session, Model model, @RequestParam("page") int page) {
@@ -91,13 +91,14 @@ public class UserController {
 //	public void updatingUser(@PathVariable("userId") int userId, Model model) {
 //		
 //	}
-	
+	//***Grtting user by id
 	@GetMapping("/getUserById/")
 	@ResponseBody
 	public User updatingUser(int userId, Model model, User user) {
 		return userService.getUserById(userId);
 	}
 	
+	//***Login controller
 	@PostMapping("/login")
 	public User userLogin(HttpServletRequest request) {
 		String username = request.getParameter("username");
