@@ -115,7 +115,68 @@ $(document).ready(function () {
     			page: clickedPage
     		},
     		success: function(result){
-    			console.log(result)
+    			console.log(result);
+    			var userList = result.pageUser.content;
+    			console.log(userList);
+    			var str = "";
+    			for(let i=0; i<userList.length; i++){
+    				let obj = userList[i];
+    				console.log(obj);
+    				$('#tBody').empty();
+    				str += "<tr>" +
+    						"<th scope='row'>"+obj.userId+"</span></th>" +
+    						"<td>"+obj.userFirstName+"</td>" +
+    						"<td>"+obj.userLastName+"</td>" +
+    						"<td>"+obj.userEmail+"</td>" +
+    						"<td>"+obj.userContactNumber+"</td>" +
+    						"<td>"+obj.userStatus+"</td>" +
+    						   
+    						"<td>"+obj.userBillingAddress+"</td>" +
+    						"<td>"+obj.userBillingCity+"</td>" +
+    						"<td>"+obj.userBillingZipcode+"</td>" +
+    						"<td>"+obj.userBillingCountry+"</td>" +
+    						   
+    						"<td>"+obj.userShippingAddress+"</td>" +
+    						"<td>"+obj.userShippingCity+"</td>" +
+    						"<td>"+obj.userShippingZipcode+"</td>" +
+    						"<td>"+obj.userShippingCountry+"</td>" +
+    						   
+    						"<td>"+new Date(obj.userCreatedOn)+"</td>" +
+    						"<td>"+new Date(obj.userUpdatedOn)+"</td>" +
+    						
+    						"<td>" +
+    							"<a class='btn btn-sm btn-info eBtn'" +
+    							"th:href='@{/getUserById/(userId="+obj.userId+")} '>Update </a>" +
+    							"<p><a th:href='@{/deletingUser/"+obj.userId+"}'" +
+    							"class='btn btn-sm btn-danger'> Delete </a></p>"+
+    						
+    						+"</td>" +
+    						
+    						"</tr>";
+    				
+    			}
+    			//console.log(result.currentPage);
+    			var p = result.pageUser.totalPages;
+    			console.log(isNaN(p));
+//    			var navStr = "<ul class='pagination justify-content-center'>" +
+//    					"<li class='page-item'" +
+//    					"th:each='i : ${#numbers.sequence(0,2)}'" +
+//    					"th:classappend=\" ${"+result.currentPage+"}==${i}?'active':''\"><a" +
+//    					"class='page-link pNavLink' th:href='@{/admin/userManager/(page=${i})}' th:data-page='${i}'" +
+//    					"th:text='${i}'> </a></li>" +
+//    					"</ul>";
+    			
+    			var pillStr = "<ul class=\"pagination justify-content-center\"> " +
+		    					"<li class=\"page-item\" th:each=\"i : ${#numbers.sequence(0,"+p+")}\" th:classappend=\"${currentPage}==${i}?'active':''\">" +
+		    						"<a class=\"page-link pNavLink\" th:href=\"@{/admin/userManager/(page=${i})}\" th:data-page=\"${i}\" th:text=\"${i}\"> </a>" +
+		    					"</li>" +
+		    				  "</ul>";
+    			
+    			
+    			$('#tBody').html(str);
+    			
+    			//$('#pNav').empty();
+    			$('#pNav').html(pillStr);
     		},
     		error: function(e){
     			console.log("ERROR: ",e);

@@ -270,7 +270,7 @@
 							<th scope="col">Action</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tBody">
 						<tr th:each="user : ${userList.content}">
 							<th scope="row"><span th:text="${user.getUserId()}"></span></th>
 							<td><span th:text="${user.getUserFirstName()}"></span></td>
