@@ -21,7 +21,7 @@
 		<!-- Modal for add user -->
 		<div class="myForm">
 			<form class="form-horizontal" id="addUser" th:object="${user}"
-				method="post" action="#">
+				method="post" >
 				<div class="modal fade" id="addUserModal" tabindex="-1"
 					role="dialog" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
@@ -38,12 +38,12 @@
 
 								<fieldset>
 
-									Form Name
+									<!-- Form Name -->
 									<legend>Add New User</legend>
 
-									<input type="hidden" name="userId" value="12">
-								<input type="hidden" name="userCreatedOn" value="date('Y-m-d')">
-								<input type="hidden" name="userUpdatedOn" value="date('Y-m-d')">
+									<input type="hidden" th:field="*{userId}">
+									<!-- <input type="hidden" name="userCreatedOn" value="date('Y-m-d')">
+									<input type="hidden" name="userUpdatedOn" value="date('Y-m-d')"> -->
 
 									<!-- First name input -->
 									<div class="form-group row">
@@ -91,7 +91,7 @@
 										<div class="col-sm-8">
 											<input th:field="*{userContactNumber}" min="5" maxlength="20"
 												placeholder="Enter Contact Number" class="form-control"
-												required type="email" /> <span class="text-danger"
+												required type="text" /> <span class="text-danger"
 												th:if="${#fields.hasErrors('userContactNumber')}"
 												th:errors="*{userContactNumber}"></span>
 										</div>
@@ -231,8 +231,8 @@
 									<div class="form-group">
 										<label class="col-md-4 control-label" for="button1id"></label>
 										<div class="col-md-8">
-											<button type="submit" id="submit" name="submit"
-												class="btn btn-success">Submit</button>
+											<button type="submit" id="update" name="submit"
+												class="btn btn-success">Update</button>
 											<button id="cancel" name="cancel" class="btn btn-danger"
 												data-dismiss="modal">Cancel</button>
 										</div>
@@ -271,7 +271,7 @@
 						</tr>
 					</thead>
 					<tbody id="tBody">
-						<tr th:each="user : ${userList.content}">
+						<tr th:each="user : ${userList.content}" th:id="user-+${user.getUserId()}">
 							<th scope="row"><span th:text="${user.getUserId()}"></span></th>
 							<td><span th:text="${user.getUserFirstName()}"></span></td>
 							<td><span th:text="${user.getUserLastName()}"></span></td>

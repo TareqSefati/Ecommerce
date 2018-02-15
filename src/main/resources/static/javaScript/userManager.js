@@ -65,11 +65,14 @@ $(document).ready(function () {
     });
     
     //***Pop up editing form with populated data
-    $('.table .eBtn').on('click', function(event){
+    $(document).on('click','.table .eBtn', function(event){
     	event.preventDefault();
     	var href = $(this).attr('href');
-    	
+    	//console.log(href);
     	jQuery.get(href, function(user, status){
+    		//console.log(user.userFirstName);
+    		$('.myForm #userId').val(user.userId);
+    		//console.log(user.userId);
     		$('.myForm #userFirstName').val(user.userFirstName);
     		$('.myForm #userLastName').val(user.userLastName);
     		$('.myForm #userEmail').val(user.userEmail);
@@ -105,7 +108,7 @@ $(document).ready(function () {
     });
     
     //***ajax pagination
-    $('#pNav .pNavLink').on('click', function(event){
+    $(document).on('click','#pNav .pNavLink', function(event){
     	event.preventDefault();
     	var clickedPage = $(this).data("page");
     	$.ajax({
@@ -123,8 +126,8 @@ $(document).ready(function () {
     			for(let i=0; i<userList.length; i++){
     				let obj = userList[i];
     				console.log(obj);
-    				$('#tBody').empty();
-    				str += "<tr>" +
+    				//$('#tBody').empty();
+    				str += "<tr id='user-"+obj.userId+"'>" +
     						"<th scope='row'>"+obj.userId+"</span></th>" +
     						"<td>"+obj.userFirstName+"</td>" +
     						"<td>"+obj.userLastName+"</td>" +
@@ -147,8 +150,8 @@ $(document).ready(function () {
     						
     						"<td>" +
     							"<a class='btn btn-sm btn-info eBtn'" +
-    							"th:href='@{/getUserById/(userId="+obj.userId+")}'>Update </a>" +
-    							"<p><a th:href='@{/deletingUser/"+obj.userId+"}'" +
+    							"href='/getUserById/?userId="+obj.userId+"'>Update </a>" +
+    							"<p><a href='/deletingUser/"+obj.userId+"'" +
     							"class='btn btn-sm btn-danger'> Delete </a></p>"+
     						
     						+"</td>" +
@@ -157,7 +160,7 @@ $(document).ready(function () {
     				
     			}
     			//console.log(result.currentPage);
-//    			var p = result.pageUser.totalPages;
+    			//var p = result.pageUser.totalPages;
 //    			console.log(isNaN(p));
 //    			var navStr = "<ul class='pagination justify-content-center'>" +
 //    					"<li class='page-item'" +
@@ -175,6 +178,7 @@ $(document).ready(function () {
 //    			
     			//$(this).addClass('active');
     			$('#tBody').html(str);
+    			//$('.card #pNav').html(pillStr);
     			
     			//$('#pNav').empty();
     			//***Highlight active pagination
@@ -192,5 +196,30 @@ $(document).ready(function () {
     		}
     	});
     });
+    
+    //***Update a user using Ajax
+    $('.myForm #update').on('click', function(event){
+    	event.preventDefault();
+    	alert("updated");
+    	var id = $("#userId").val();
+    	console.log(id);
+    	$.ajax({
+    		type: "POST",
+    		url: "/update",
+    		data: {
+    			userId : id
+    		},
+    		success: function(result){
+    			console.log("SUCCESS", result);
+    			var updatedUser = "";
+    			$('#tBody #user-'+id).html(updatedUser);
+    		},
+    		error: function(e){
+    			console.log("ERROR: ", e);
+    		}
+    	});
+    });
 
 });
+
+

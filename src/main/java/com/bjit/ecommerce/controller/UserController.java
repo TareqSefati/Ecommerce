@@ -91,10 +91,19 @@ public class UserController {
 //	public void updatingUser(@PathVariable("userId") int userId, Model model) {
 //		
 //	}
-	//***Grtting user by id
+	//***Getting user by id
 	@GetMapping("/getUserById/")
 	@ResponseBody
 	public User updatingUser(int userId, Model model, User user) {
+		return userService.getUserById(userId);
+	}
+	
+	//***Updating a user
+	@PostMapping("/update")
+	@ResponseBody
+	public User updateUser(int userId, Model model, User user) {
+		System.out.println("BACK END: User is updating-> "+userId);
+		//following operation should be update
 		return userService.getUserById(userId);
 	}
 	
