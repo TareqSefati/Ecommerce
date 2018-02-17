@@ -1,23 +1,26 @@
 package com.bjit.ecommerce.controller;
 
 import java.util.Date;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpRequest;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bjit.ecommerce.entity.User;
+import com.bjit.ecommerce.response.UpdatingUserResponse;
 import com.bjit.ecommerce.response.UserPageResponse;
 import com.bjit.ecommerce.service.UserService;
 
@@ -99,12 +102,24 @@ public class UserController {
 	}
 	
 	//***Updating a user
-	@PostMapping("/update")
+	@PostMapping(value="/update", produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public User updateUser(int userId, Model model, User user) {
-		System.out.println("BACK END: User is updating-> "+userId);
+	public UpdatingUserResponse updateUser(@Valid User user, BindingResult result) {
+		//System.out.println("BACK END: User is updating-> "+userId);
+		UpdatingUserResponse response = new UpdatingUserResponse();
+		System.out.println(user);
 		//following operation should be update
-		return userService.getUserById(userId);
+		if(result.hasErrors()) {
+			Map<String, String> errors = result.getFieldErrors().stream().collect(
+					Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage)
+					);
+			response.setErrorMessages(errors);
+			response.setValidated(false);
+		}else {
+			response.setUser(user);
+			response.setValidated(true);
+		}
+		return response;
 	}
 	
 	//***Login controller

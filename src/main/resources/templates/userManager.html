@@ -20,8 +20,8 @@
 		</p>
 		<!-- Modal for add user -->
 		<div class="myForm">
-			<form class="form-horizontal" id="addUser" th:object="${user}"
-				method="post" >
+			<form class="form-horizontal" id="updateUser" th:object="${user}"
+				method="post" name="updateUser">
 				<div class="modal fade" id="addUserModal" tabindex="-1"
 					role="dialog" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
@@ -42,8 +42,9 @@
 									<legend>Add New User</legend>
 
 									<input type="hidden" th:field="*{userId}">
-									<!-- <input type="hidden" name="userCreatedOn" value="date('Y-m-d')">
-									<input type="hidden" name="userUpdatedOn" value="date('Y-m-d')"> -->
+									<!-- <input type="hidden" th:field="*{userPassword}">
+									<input type="date" name="userCreatedOn" value="">
+									<input type="date" name="userUpdatedOn" value=""> -->
 
 									<!-- First name input -->
 									<div class="form-group row">

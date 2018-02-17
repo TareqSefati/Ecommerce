@@ -200,19 +200,36 @@ $(document).ready(function () {
     //***Update a user using Ajax
     $('.myForm #update').on('click', function(event){
     	event.preventDefault();
-    	alert("updated");
+    	//alert("updated");
+    	//$('input').next().remove();
+    	var updatingUser = $('form[name=updateUser]').serializeArray();
+    	//var updateUser = document.getElementById("updateUser");
+    	//var fd = new FormData(addUser);
     	var id = $("#userId").val();
     	console.log(id);
+    	console.log("Updating User", updatingUser);
+    	
     	$.ajax({
     		type: "POST",
     		url: "/update",
-    		data: {
-    			userId : id
-    		},
+    		data : $('form[name=updateUser]').serialize(),
     		success: function(result){
-    			console.log("SUCCESS", result);
-    			var updatedUser = "";
-    			$('#tBody #user-'+id).html(updatedUser);
+//    			console.log("SUCCESS", result);
+//    			var updatedUser = "";
+//    			$('#tBody #user-'+id).html(updatedUser);
+    			if(result.validated){
+    				console.log("SUCCESS", result.user);
+    			}else{
+    				//Setting error messages
+    				console.log("SUCCESS BUT ERROR");
+    				$.each(result.errorMessages,function(key,value){
+    					if(key != "userId" || key != "userPassword" || key != "userCreatedOn" || key != "userUpdatedOn"){
+    						$('input[name='+key+']').after('<span class="text-danger">'+value+'</span>');
+    						//$('input[name='+key+']').after( '<span class="text-danger" th:if="${#fields.hasErrors('+key+')}" th:errors="*{'+value+'}"></span>)');
+    					}
+					});
+    			}
+    			
     		},
     		error: function(e){
     			console.log("ERROR: ", e);
