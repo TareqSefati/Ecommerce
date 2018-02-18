@@ -152,8 +152,9 @@ $(document).ready(function () {
     						"<td>" +
     							"<a class='btn btn-sm btn-info eBtn'" +
     							"href='/getUserById/?userId="+obj.userId+"'>Update </a>" +
-    							"<p><a href='/deletingUser/"+obj.userId+"'" +
-    							"class='btn btn-sm btn-danger'> Delete </a></p>"+
+    							
+    							"<a style='margin-top: 3px;' class='btn btn-sm btn-danger eDelete'" +
+    							"href='/deletingUser/?userId="+obj.userId+"'>Delete </a>" +
     						
     						+"</td>" +
     						
@@ -199,7 +200,7 @@ $(document).ready(function () {
     });
     
     //***Update a user using Ajax
-    $('.myForm #update').on('click', function(event){
+    $(document).on('click', '.myForm #update', function(event){
     	event.preventDefault();
     	//alert("updated");
     	//$('input').next().remove();
@@ -232,6 +233,40 @@ $(document).ready(function () {
     			
     			if(result.validated){
     				console.log("SUCCESS", result.user);
+    				let obj = result.user;
+//    				console.log(obj);
+//    				alert(obj);
+    				let str = "<th scope='row'>"+obj.userId+"</span></th>" +
+    				"<td>"+obj.userFirstName+"</td>" +
+					"<td>"+obj.userLastName+"</td>" +
+					"<td>"+obj.userEmail+"</td>" +
+					"<td>"+obj.userContactNumber+"</td>" +
+					"<td>"+obj.userStatus+"</td>" +
+					   
+					"<td>"+obj.userBillingAddress+"</td>" +
+					"<td>"+obj.userBillingCity+"</td>" +
+					"<td>"+obj.userBillingZipcode+"</td>" +
+					"<td>"+obj.userBillingCountry+"</td>" +
+					   
+					"<td>"+obj.userShippingAddress+"</td>" +
+					"<td>"+obj.userShippingCity+"</td>" +
+					"<td>"+obj.userShippingZipcode+"</td>" +
+					"<td>"+obj.userShippingCountry+"</td>" +
+					   
+					"<td>"+new Date(obj.userCreatedOn)+"</td>" +
+					"<td>"+new Date(obj.userUpdatedOn)+"</td>" +
+					
+					"<td>" +
+						"<a class='btn btn-sm btn-info eBtn'" +
+						"href='/getUserById/?userId="+obj.userId+"'>Update </a>" +
+						
+						"<a style='margin-top: 3px;' class='btn btn-sm btn-danger eDelete'" +
+						"href='/deletingUser/?userId="+obj.userId+"'>Delete </a>" +
+					
+					+"</td>" ;
+    				
+    				$('#tBody #user-'+id).html(str);
+    				$('.myForm #addUserModal').modal('hide');
     			}else{
     				//Setting error messages
     				console.log("SUCCESS BUT ERROR");
@@ -247,6 +282,25 @@ $(document).ready(function () {
     		},
     		error: function(e){
     			console.log("ERROR: ", e);
+    		}
+    	});
+    });
+    
+    //***Delete a user using AJAX
+    $(document).on('click', '.table .eDelete', function(event){
+    	event.preventDefault();
+    	alert("Deleting a Item.")
+    	var href = $(this).attr('href');
+    	console.log(href);
+    	$.ajax({
+    		type: "POST",
+    		url: href,
+    		success: function(result) {
+    			console.log("Delete Success:" ,result);
+    			$('#tBody #user-'+result).html("");
+    		},
+    		error: function(e){
+    			console.log("Failed to Delete:", e);
     		}
     	});
     });

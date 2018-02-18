@@ -299,9 +299,10 @@
 									th:href="@{/getUserById/(userId=${user.getUserId()})} ">
 									Update </a>
 								
-								<p>
-									<a th:href="@{/deletingUser/} + ${user.getUserId()}"
-										class="btn btn-sm btn-danger"> Delete </a>
+								<p style="margin-top: 3px;">
+									<a class="btn btn-sm btn-danger eDelete"
+									th:href="@{/deletingUser/(userId=${user.getUserId()})} ">
+									Delete </a>
 								</p>
 							</td>
 						</tr>

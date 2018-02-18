@@ -117,12 +117,45 @@ public class UserController {
 			response.setErrorMessages(errors);
 			response.setValidated(false);
 		}else {
-			response.setUser(user);
+			User newUser = userService.getUserById(user.getUserId());
+			newUser.setUserFirstName(user.getUserFirstName());
+			newUser.setUserLastName(user.getUserLastName());
+			newUser.setUserEmail(user.getUserEmail());
+			newUser.setUserContactNumber(user.getUserContactNumber());
+			newUser.setUserStatus(user.getUserStatus());
+			newUser.setUserBillingAddress(user.getUserBillingAddress());
+			newUser.setUserBillingCity(user.getUserBillingCity());
+			newUser.setUserBillingZipcode(user.getUserBillingZipcode());
+			newUser.setUserBillingCountry(user.getUserBillingCountry());
+			
+			newUser.setUserShippingAddress(user.getUserShippingAddress());
+			newUser.setUserShippingCity(user.getUserShippingCity());
+			newUser.setUserShippingCountry(user.getUserShippingCountry());
+			newUser.setUserShippingZipcode(user.getUserShippingZipcode());
+			
+			newUser.setUserUpdatedOn(new Date());
+			
+			
+			userService.updateUser(newUser);
+			response.setUser(newUser);
 			response.setValidated(true);
 		}
 		return response;
 	}
 	
+	//***Deleting a user
+	@PostMapping(value="/deletingUser", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public int deleteUser(int userId) {
+		System.out.println("Deleting User.");
+		try {
+			userService.deleteUser(userId);
+			return userId;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return -1;
+		}
+	}
 	//***Login controller
 	@PostMapping("/login")
 	public User userLogin(HttpServletRequest request) {

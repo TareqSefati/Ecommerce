@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bjit.ecommerce.entity.User;
 import com.bjit.ecommerce.repository.UserRepository;
 
 @Service
+@Transactional
 public class UserService {
 
 	@Autowired
@@ -30,6 +32,14 @@ public class UserService {
 	
 	public User getUserById(int userId) {
 		return userRepository.findByUserId(userId);
+	}
+	
+	public User updateUser(User user) {
+		return userRepository.save(user);
+	}
+	
+	public void deleteUser(int userId) {
+		userRepository.delete(userId);
 	}
 	
 }
