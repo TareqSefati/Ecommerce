@@ -113,6 +113,7 @@ public class UserController {
 			Map<String, String> errors = result.getFieldErrors().stream().collect(
 					Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage)
 					);
+			//System.out.println(errors);
 			response.setErrorMessages(errors);
 			response.setValidated(false);
 		}else {

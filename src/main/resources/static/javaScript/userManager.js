@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+	var eM;
     $("#submit").on("click", function(event) {
 
         //stop submit the form, we will post it manually.
@@ -208,6 +209,16 @@ $(document).ready(function () {
     	var id = $("#userId").val();
     	console.log(id);
     	console.log("Updating User", updatingUser);
+    	//removing all error
+    	if(!!eM){
+	    	$.each(eM,function(key,value){
+				if(key != "userId" || key != "userPassword" || key != "userCreatedOn" || key != "userUpdatedOn"){
+					$('input[name='+key+']').next().remove();
+					//$('input[name='+key+']').after( '<span class="text-danger" th:if="${#fields.hasErrors('+key+')}" th:errors="*{'+value+'}"></span>)');
+				}
+			});
+	    	console.log(eM);
+    	}
     	
     	$.ajax({
     		type: "POST",
@@ -217,6 +228,8 @@ $(document).ready(function () {
 //    			console.log("SUCCESS", result);
 //    			var updatedUser = "";
 //    			$('#tBody #user-'+id).html(updatedUser);
+    			
+    			
     			if(result.validated){
     				console.log("SUCCESS", result.user);
     			}else{
@@ -228,6 +241,7 @@ $(document).ready(function () {
     						//$('input[name='+key+']').after( '<span class="text-danger" th:if="${#fields.hasErrors('+key+')}" th:errors="*{'+value+'}"></span>)');
     					}
 					});
+    				eM = result.errorMessages;
     			}
     			
     		},
